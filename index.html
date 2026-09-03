@@ -59,8 +59,9 @@
     .brand { color: var(--text); text-decoration: none; letter-spacing: -.03em; }
     .brand::after { content: "_"; color: var(--accent-solid); }
     .nav-meta { display: flex; align-items: center; gap: 1.25rem; }
-    .theme-picker { display: flex; gap: .8rem; margin: 0; padding: 0; border: 0; }
-    .theme-label { margin-right: .15rem; color: var(--muted); }
+    .theme-picker { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; margin: 0; padding: 0; border: 0; }
+    .theme-label { color: var(--muted); }
+    .theme-options { display: flex; align-items: center; gap: .9rem; }
     .theme-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     .theme-picker label { position: relative; padding: .35rem 0; color: var(--faint); cursor: pointer; }
     .theme-picker label::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--gradient); opacity: 0; }
@@ -308,9 +309,11 @@
       <nav aria-label="Footer navigation"><a href="https://github.com/Pleo2/agentlowmem.dev">source</a></nav>
       <div class="theme-picker" role="radiogroup" aria-labelledby="theme-label">
         <span class="theme-label" id="theme-label">theme:</span>
-        <input class="theme-input" type="radio" name="theme" id="theme-system" checked><label for="theme-system">system</label>
-        <input class="theme-input" type="radio" name="theme" id="theme-light"><label for="theme-light">light</label>
-        <input class="theme-input" type="radio" name="theme" id="theme-dark"><label for="theme-dark">dark</label>
+        <div class="theme-options">
+          <input class="theme-input" type="radio" name="theme" id="theme-system" checked><label for="theme-system">system</label>
+          <input class="theme-input" type="radio" name="theme" id="theme-light"><label for="theme-light">light</label>
+          <input class="theme-input" type="radio" name="theme" id="theme-dark"><label for="theme-dark">dark</label>
+        </div>
       </div>
     </div>
   </footer>

@@ -19,8 +19,11 @@ require() {
 
 printf '%s' "$FOOTER" | grep -Eq 'class="theme-picker"[^>]+role="radiogroup"[^>]+aria-labelledby="theme-label"' || fail 'theme selector must be an accessible footer control'
 printf '%s' "$FOOTER" | grep -Eq 'id="theme-label">theme:<' || fail 'theme selector needs a visible label'
+printf '%s' "$FOOTER" | grep -Eq 'class="theme-options"' || fail 'theme choices need their own aligned row below the label'
 printf '%s' "$FOOTER" | grep -Eq 'class="footer-tools"' || fail 'footer links and theme selector need a stable vertical group'
 require '\.footer-tools[^\{]*\{[^}]*flex-direction:[[:space:]]*column' 'footer controls must stack instead of crowding one row'
+require '\.theme-picker[^\{]*\{[^}]*flex-direction:[[:space:]]*column' 'theme label must sit above its choices'
+require '\.theme-options[^\{]*\{[^}]*display:[[:space:]]*flex' 'theme choices must stay aligned as one row'
 if printf '%s' "$HEADER" | grep -Eq 'theme-picker|theme-system|theme-light|theme-dark'; then
   fail 'theme selector must not compete with primary navigation'
 fi
