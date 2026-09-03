@@ -66,7 +66,7 @@ The interface uses a warm black background, ivory foreground, restrained neutral
 
 The terminal session uses a restrained macOS window treatment: rounder corners, a compact three-zone title bar, decorative traffic-light controls, a centered `agent-lowmem — managed session` title, and shallow border-and-shadow depth. The terminal surface uses 45% opacity and its title bar 55%, integrating the window with the page instead of presenting it as an opaque card. Its body keeps a fixed height throughout the sequence, with a larger fixed mobile height for wrapped lines, so later content never shifts the window or the page below it. Both commands type once with a finite caret that disappears. The `doctor` command and its seven rows reveal first, pause briefly after `ready`, and then collapse completely without reducing text contrast. At 4.15 seconds the managed-run command replaces it. Its working states resolve from finite loaders to checkmarks at deliberate 650-millisecond intervals. After cleanup, the final `result completed` line types in over one second and settles after approximately 10.7 seconds, with `result` carrying its own horizontal lavender-to-cyan gradient. Neither sequence loops. Its title bar suggests the current macOS material hierarchy with a CSS gradient, but avoids `backdrop-filter`, images, scripts, and runtime dependencies so the terminal remains inexpensive to render.
 
-The browser selects the palette with `prefers-color-scheme`. The document declares support for both color schemes. Theme adaptation requires no script, control, local storage, cookie, or initial flash.
+The browser selects the initial palette with `prefers-color-scheme`. A compact `system / light / dark` radio group may override that choice for the current page using CSS `:has()`. The control is accessible by keyboard and carries no script, local storage, cookie, request, or initial flash. It intentionally resets to `system` after reload; browsers without the selector support retain the valid system-selected theme. The light palette uses pure white for the page background and restrained neutral-gray surfaces.
 
 All landing-page text uses this local-first monospace stack:
 
@@ -144,6 +144,6 @@ Visual browser testing is a release check, not a runtime dependency.
 
 ## 12. Explicit non-goals
 
-The first release does not include documentation routes, a blog, a library reference, an interactive terminal, a waitlist, analytics, telemetry, a theme toggle, an installation script, a package download, a CMS, user accounts, comments, search, or localization.
+The first release does not include documentation routes, a blog, a library reference, an interactive terminal, a waitlist, analytics, telemetry, an installation script, a package download, a CMS, user accounts, comments, search, or localization. Its CSS-only theme selector is presentational state, not an application feature, and stores no preference.
 
 These exclusions keep the first public artifact consistent with Agent Lowmem’s simplicity and resource-efficiency goals.

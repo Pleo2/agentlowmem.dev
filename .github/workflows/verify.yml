@@ -23,6 +23,8 @@ jobs:
         run: ./tests/verify-doctor-sequence.sh
       - name: Verify fixed terminal motion
         run: ./tests/verify-terminal-motion.sh
+      - name: Verify CSS-only theme picker
+        run: ./tests/verify-theme-picker.sh
       - name: Verify public prerelease surface
         run: ./tests/verify-prerelease-public.sh
       - name: Verify production page
