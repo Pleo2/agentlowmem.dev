@@ -78,7 +78,7 @@
     .window-control.zoom { background: #28c840; }
     .window-title { grid-column: 2; color: var(--muted); letter-spacing: -.02em; }
     .window-spacer { grid-column: 3; }
-    .terminal-body { padding: clamp(1.5rem, 5vw, 2.25rem); color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
+    .terminal-body { height: 18.75rem; overflow: hidden; padding: clamp(1.5rem, 5vw, 2.25rem); color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
     .prompt, .ok { color: var(--accent-solid); }
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
@@ -91,6 +91,7 @@
     .doctor-row:last-child { margin-top: .8rem; }
     .doctor-row:last-child dt { color: var(--accent-solid); }
     .run-sequence { margin: 0; }
+    .typed-command { display: inline-block; vertical-align: bottom; white-space: nowrap; }
     .sequence-steps { display: grid; gap: .18rem; margin: 0; padding: 0; list-style: none; }
     .sequence-step { display: grid; grid-template-columns: .8rem 9ch minmax(0, 1fr); gap: .6rem; align-items: baseline; }
     .step-loader { position: relative; width: .7rem; height: .7rem; align-self: center; }
@@ -100,10 +101,13 @@
     .trace-key { color: var(--faint); }
     .sequence-step:last-child .trace-key, .sequence-step:last-child .step-loader::after { color: var(--accent-solid); }
     @media (prefers-reduced-motion: no-preference) {
-      .doctor-sequence { display: block; max-height: 14rem; overflow: hidden; animation: doctor-exit .35s ease 3.05s forwards; }
+      .doctor-sequence { display: block; max-height: 14rem; overflow: hidden; animation: doctor-exit .3s ease 3.3s forwards; }
       .doctor-command { opacity: 0; animation: doctor-reveal .01s linear var(--delay) forwards; }
       .doctor-row { max-height: 0; overflow: hidden; opacity: 0; animation: doctor-row-reveal .18s ease var(--delay) forwards; }
-      .run-sequence { max-height: 0; overflow: hidden; opacity: 0; animation: sequence-start .3s ease 3.4s forwards; }
+      .run-sequence { visibility: hidden; animation: sequence-start .01s linear 3.65s forwards; }
+      .typed-command { width: 0; overflow: hidden; border-right: 1px solid var(--accent-solid); }
+      .doctor-typed { --typed-width: 19ch; animation: type-command .6s steps(19, end) .7s forwards, caret-off .01s linear 1.3s forwards; }
+      .run-typed { --typed-width: 21ch; animation: type-command .7s steps(21, end) 3.65s forwards, caret-off .01s linear 4.35s forwards; }
       .sequence-step { opacity: 0; animation: step-reveal .01s linear var(--delay) forwards; }
       .step-loader::before { opacity: 1; animation: loader-spin .3s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .3s) forwards; }
       .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .3s) forwards; }
@@ -111,7 +115,9 @@
     @keyframes doctor-reveal { to { opacity: 1; } }
     @keyframes doctor-row-reveal { to { max-height: 2rem; opacity: 1; } }
     @keyframes doctor-exit { to { max-height: 0; visibility: hidden; } }
-    @keyframes sequence-start { to { max-height: 20rem; opacity: 1; } }
+    @keyframes sequence-start { to { visibility: visible; } }
+    @keyframes type-command { to { width: var(--typed-width); } }
+    @keyframes caret-off { to { border-right-color: transparent; } }
     @keyframes step-reveal { to { opacity: 1; } }
     @keyframes loader-spin { to { transform: rotate(1turn); } }
     @keyframes loader-hide { to { opacity: 0; } }
@@ -136,6 +142,7 @@
     @media (max-width: 38rem) {
       .shell { width: min(100% - 1.5rem, 42.5rem); }
       .nav-meta { gap: .85rem; }
+      .terminal-body { height: 22rem; }
     }
     @media (min-width: 70rem) {
       .shell { margin-left: 2rem; margin-right: 0; }
@@ -201,27 +208,27 @@
       </div>
       <div class="terminal-body">
         <div class="doctor-sequence" aria-label="Doctor inspection sequence">
-          <code class="doctor-command" style="--delay: .7s"><span class="prompt">$</span> <span class="bright">agent-lowmem doctor</span></code>
+          <code class="doctor-command" style="--delay: .7s"><span class="prompt">$</span> <span class="bright typed-command doctor-typed">agent-lowmem doctor</span></code>
           <dl class="doctor-output">
-            <div class="doctor-row" style="--delay: .95s"><dt>host</dt><dd>macOS arm64</dd></div>
-            <div class="doctor-row" style="--delay: 1.2s"><dt>profile</dt><dd>Apple M2 · 8 GiB</dd></div>
-            <div class="doctor-row" style="--delay: 1.45s"><dt>repository</dt><dd>JavaScript / TypeScript</dd></div>
-            <div class="doctor-row" style="--delay: 1.7s"><dt>policy</dt><dd>one heavy operation</dd></div>
-            <div class="doctor-row" style="--delay: 1.95s"><dt>watch</dt><dd>denied</dd></div>
-            <div class="doctor-row" style="--delay: 2.2s"><dt>cleanup</dt><dd>owned process group</dd></div>
-            <div class="doctor-row" style="--delay: 2.45s"><dt>ready</dt><dd>focused validation recommended</dd></div>
+            <div class="doctor-row" style="--delay: 1.35s"><dt>host</dt><dd>macOS arm64</dd></div>
+            <div class="doctor-row" style="--delay: 1.55s"><dt>profile</dt><dd>Apple M2 · 8 GiB</dd></div>
+            <div class="doctor-row" style="--delay: 1.75s"><dt>repository</dt><dd>JavaScript / TypeScript</dd></div>
+            <div class="doctor-row" style="--delay: 1.95s"><dt>policy</dt><dd>one heavy operation</dd></div>
+            <div class="doctor-row" style="--delay: 2.15s"><dt>watch</dt><dd>denied</dd></div>
+            <div class="doctor-row" style="--delay: 2.35s"><dt>cleanup</dt><dd>owned process group</dd></div>
+            <div class="doctor-row" style="--delay: 2.55s"><dt>ready</dt><dd>focused validation recommended</dd></div>
           </dl>
         </div>
         <div class="run-sequence" aria-label="Managed test execution sequence">
-          <code class="sequence-command"><span class="prompt">$</span> <span class="bright">agent-lowmem run test</span></code>
+          <code class="sequence-command"><span class="prompt">$</span> <span class="bright typed-command run-typed">agent-lowmem run test</span></code>
           <ol class="sequence-steps">
-            <li class="sequence-step" style="--delay: 3.65s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
-            <li class="sequence-step" style="--delay: 4s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
-            <li class="sequence-step" style="--delay: 4.35s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
-            <li class="sequence-step" style="--delay: 4.7s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
-            <li class="sequence-step" style="--delay: 5.05s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
-            <li class="sequence-step" style="--delay: 5.4s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
-            <li class="sequence-step" style="--delay: 5.75s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
+            <li class="sequence-step" style="--delay: 4.4s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
+            <li class="sequence-step" style="--delay: 4.75s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
+            <li class="sequence-step" style="--delay: 5.1s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
+            <li class="sequence-step" style="--delay: 5.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
+            <li class="sequence-step" style="--delay: 5.8s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
+            <li class="sequence-step" style="--delay: 6.15s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
+            <li class="sequence-step" style="--delay: 6.5s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
           </ol>
         </div>
       </div>
