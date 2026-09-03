@@ -13,7 +13,7 @@ write_valid() {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <link rel="icon" href="data:,">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E">
   <style>
     @media (prefers-color-scheme: light) { :root { color: #111; } }
     @media (prefers-reduced-motion: reduce) { * { animation: none; } }

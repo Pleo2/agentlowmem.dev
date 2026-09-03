@@ -16,7 +16,7 @@
 
 The first Agent Lowmem website is a public, English-language landing page for developers using coding agents on memory-constrained Macs. It introduces the product, demonstrates its intended command-line experience, and directs visitors to the open-source implementation while the CLI is in early development.
 
-The page must embody the product promise. It is delivered as a static document with no client framework, hydration, third-party runtime, analytics, images, or downloaded fonts.
+The page must embody the product promise. It is delivered as a static document with no client framework, hydration, third-party runtime, analytics, downloaded images, or downloaded fonts. Its only image payload is a request-free SVG favicon embedded in the document URL.
 
 The visual reference is the restraint and technical clarity of `fx.sh`, not its composition or brand. Agent Lowmem uses its own copy, typographic identity, pressure-state accent, and terminal content.
 
@@ -45,7 +45,7 @@ When multiple content routes become necessary, the project may adopt a static-si
 
 The deployed product consists of a single hand-authored `index.html`. Its critical CSS is inline, and the initial release contains no JavaScript. Vercel configuration may exist outside the transferred page to define clean URLs, caching, and security headers.
 
-There is no backend, API, database, authentication, cookie, service worker, external asset request, or build-time framework. The HTML remains useful when CSS is unavailable.
+There is no backend, API, database, authentication, cookie, service worker, external asset request, or build-time framework. A compact `ag_` SVG favicon is embedded as a `data:` URL so browsers do not make a fallback favicon request. The HTML remains useful when CSS is unavailable.
 
 The repository initially contains:
 
