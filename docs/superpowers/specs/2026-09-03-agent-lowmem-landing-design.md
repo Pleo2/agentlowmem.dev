@@ -83,7 +83,7 @@ The wordmark is textual: `agent_lowmem`. The primary action is an underlined tex
 
 The first release is primarily a reading surface. The GitHub call to action and source links use ordinary anchors, so core behavior requires no JavaScript.
 
-The layout is a single centered reading column at every viewport width; desktop must not override its automatic inline margins or pin the column to one edge. The hero begins no more than `3rem` below the navigation divider, and the terminal follows it with no more than `4rem` of separation. On wider screens, whitespace may increase symmetrically while line lengths remain bounded. The terminal wraps or horizontally contains long code without forcing document-level horizontal scrolling.
+The layout is a single centered reading column at every viewport width; desktop must not override its automatic inline margins or pin the column to one edge. The hero begins no more than `3rem` below the navigation divider, and the terminal follows it with no more than `4rem` of separation. The capability list follows the `without / with` comparison directly, using the first capability's internal padding for separation instead of an empty section gap or a duplicate divider. On wider screens, whitespace may increase symmetrically while line lengths remain bounded. The terminal wraps or horizontally contains long code without forcing document-level horizontal scrolling.
 
 Focus states are always visible. Every interactive element has a clear accessible name and a touch target appropriate to its context. Content order and hierarchy remain unchanged between themes and screen sizes.
 
