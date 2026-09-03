@@ -7,7 +7,7 @@ FILE="$ROOT/index.html"
 require() {
   pattern=$1
   message=$2
-  grep -Eiq "$pattern" "$FILE" || {
+  grep -Eiq -- "$pattern" "$FILE" || {
     echo "terminal window: $message" >&2
     exit 1
   }
@@ -16,7 +16,7 @@ require() {
 reject() {
   pattern=$1
   message=$2
-  if grep -Eiq "$pattern" "$FILE"; then
+  if grep -Eiq -- "$pattern" "$FILE"; then
     echo "terminal window: $message" >&2
     exit 1
   fi
@@ -29,6 +29,8 @@ require 'class="window-control zoom"' 'missing zoom control'
 require 'class="window-title">agent-lowmem — doctor<' 'missing centered window title'
 require '\.terminal[^\{]*\{[^}]*border-radius:' 'terminal needs a rounded window frame'
 require '\.terminal[^\{]*\{[^}]*box-shadow:' 'terminal needs restrained window depth'
+require '--window-surface:[[:space:]]*rgba\([^;]+,[[:space:]]*\.45\)' 'terminal surface must remain 45% translucent'
+require '--window-bar:[[:space:]]*rgba\([^;]+,[[:space:]]*\.55\)' 'title bar must remain 55% translucent'
 reject 'backdrop-filter' 'GPU-heavy backdrop filtering is forbidden'
 
 echo "terminal window contract passed"

@@ -64,7 +64,7 @@ Validation scripts may be added as development-only files when they measurably e
 
 The interface uses a warm black background, ivory foreground, restrained neutral text, thin borders, and a narrow vertical reading column. A CSS-only lavender-to-indigo-to-cyan gradient accents only the wordmark cursor, status dot, primary-link underline, terminal prompt, and ready state. A light palette uses darker stops with the same hierarchy.
 
-The doctor transcript uses a restrained macOS window treatment: rounder corners, a compact three-zone title bar, decorative traffic-light controls, a centered `agent-lowmem — doctor` title, and shallow border-and-shadow depth. Its title bar suggests the current macOS material hierarchy with a CSS gradient, but avoids `backdrop-filter`, images, and scripts so the terminal remains inexpensive to render.
+The doctor transcript uses a restrained macOS window treatment: rounder corners, a compact three-zone title bar, decorative traffic-light controls, a centered `agent-lowmem — doctor` title, and shallow border-and-shadow depth. The terminal surface uses 45% opacity and its title bar 55%, integrating the window with the page instead of presenting it as an opaque card. Its title bar suggests the current macOS material hierarchy with a CSS gradient, but avoids `backdrop-filter`, images, and scripts so the terminal remains inexpensive to render.
 
 The browser selects the palette with `prefers-color-scheme`. The document declares support for both color schemes. Theme adaptation requires no script, control, local storage, cookie, or initial flash.
 
