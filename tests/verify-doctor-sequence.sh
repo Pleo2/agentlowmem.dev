@@ -25,6 +25,10 @@ if grep -Eq '@keyframes[[:space:]]+doctor-exit[^}]*opacity' "$FILE"; then
   fail 'doctor exit must preserve text contrast while collapsing'
 fi
 
+if grep -Eq '\.doctor-(command|row)[^\{]*\{[^}]*opacity' "$FILE"; then
+  fail 'doctor text must preserve full contrast while appearing'
+fi
+
 if grep -Eq '<script([[:space:]>])' "$FILE"; then
   fail 'doctor sequence must not require JavaScript'
 fi

@@ -102,8 +102,8 @@
     .sequence-step:last-child .trace-key, .sequence-step:last-child .step-loader::after { color: var(--accent-solid); }
     @media (prefers-reduced-motion: no-preference) {
       .doctor-sequence { display: block; max-height: 14rem; overflow: hidden; animation: doctor-exit .3s ease 3.3s forwards; }
-      .doctor-command { opacity: 0; animation: doctor-reveal .01s linear var(--delay) forwards; }
-      .doctor-row { max-height: 0; overflow: hidden; opacity: 0; animation: doctor-row-reveal .18s ease var(--delay) forwards; }
+      .doctor-command { visibility: hidden; animation: doctor-reveal .01s linear var(--delay) forwards; }
+      .doctor-row { max-height: 0; overflow: hidden; animation: doctor-row-reveal .18s ease var(--delay) forwards; }
       .run-sequence { visibility: hidden; animation: sequence-start .01s linear 3.65s forwards; }
       .typed-command { width: 0; overflow: hidden; border-right: 1px solid var(--accent-solid); }
       .doctor-typed { --typed-width: 19ch; animation: type-command .6s steps(19, end) .7s forwards, caret-off .01s linear 1.3s forwards; }
@@ -112,8 +112,8 @@
       .step-loader::before { opacity: 1; animation: loader-spin .3s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .3s) forwards; }
       .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .3s) forwards; }
     }
-    @keyframes doctor-reveal { to { opacity: 1; } }
-    @keyframes doctor-row-reveal { to { max-height: 2rem; opacity: 1; } }
+    @keyframes doctor-reveal { to { visibility: visible; } }
+    @keyframes doctor-row-reveal { to { max-height: 2rem; } }
     @keyframes doctor-exit { to { max-height: 0; visibility: hidden; } }
     @keyframes sequence-start { to { visibility: visible; } }
     @keyframes type-command { to { width: var(--typed-width); } }
