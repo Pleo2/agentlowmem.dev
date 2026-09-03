@@ -26,7 +26,7 @@ require 'class="window-controls"[^>]+aria-hidden="true"' 'missing decorative mac
 require 'class="window-control close"' 'missing close control'
 require 'class="window-control minimize"' 'missing minimize control'
 require 'class="window-control zoom"' 'missing zoom control'
-require 'class="window-title">agent-lowmem — doctor<' 'missing centered window title'
+require 'class="window-title">agent-lowmem — managed session<' 'missing centered window title'
 require '\.terminal[^\{]*\{[^}]*border-radius:' 'terminal needs a rounded window frame'
 require '\.terminal[^\{]*\{[^}]*box-shadow:' 'terminal needs restrained window depth'
 require '--window-surface:[[:space:]]*rgba\([^;]+,[[:space:]]*\.45\)' 'terminal surface must remain 45% translucent'

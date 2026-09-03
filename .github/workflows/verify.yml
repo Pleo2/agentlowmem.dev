@@ -19,6 +19,8 @@ jobs:
         run: ./tests/verify-terminal-window.sh
       - name: Verify managed terminal sequence
         run: ./tests/verify-managed-sequence.sh
+      - name: Verify doctor terminal sequence
+        run: ./tests/verify-doctor-sequence.sh
       - name: Verify production page
         if: ${{ hashFiles('index.html') != '' }}
         run: ./scripts/verify-site.sh index.html
