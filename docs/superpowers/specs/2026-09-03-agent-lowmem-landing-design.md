@@ -1,6 +1,6 @@
 # Agent Lowmem Landing Design
 
-**Status:** Approved design candidate
+**Status:** Implemented
 
 **Date:** 2026-09-03
 
