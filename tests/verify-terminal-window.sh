@@ -27,6 +27,10 @@ require 'class="window-control close"' 'missing close control'
 require 'class="window-control minimize"' 'missing minimize control'
 require 'class="window-control zoom"' 'missing zoom control'
 require 'class="window-title">agent-lowmem — managed session<' 'missing centered window title'
+[ "$(grep -Ec 'class="window-spacer"' "$FILE")" -eq 1 ] || {
+  echo "terminal window: terminal title bar must contain exactly one layout spacer" >&2
+  exit 1
+}
 require '\.terminal[^\{]*\{[^}]*border-radius:[[:space:]]*1\.25rem' 'terminal needs the approved 20px rounded frame'
 require '\.terminal[^\{]*\{[^}]*box-shadow:' 'terminal needs restrained window depth'
 require '\.window-control[^\{]*\{[^}]*background:[[:space:]]*var\(--window-control\)' 'window controls must share one neutral gray'

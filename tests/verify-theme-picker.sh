@@ -3,6 +3,8 @@ set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 FILE="$ROOT/index.html"
+HEADER=$(sed -n '/<header class="shell">/,/<\/header>/p' "$FILE")
+FOOTER=$(sed -n '/<footer class="shell">/,/<\/footer>/p' "$FILE")
 
 fail() {
   echo "theme picker: $1" >&2
@@ -15,7 +17,11 @@ require() {
   grep -Eiq -- "$pattern" "$FILE" || fail "$message"
 }
 
-require '<fieldset[^>]+class="theme-picker"[^>]+aria-label="Theme"' 'missing accessible theme selector'
+printf '%s' "$FOOTER" | grep -Eq 'class="theme-picker"[^>]+role="radiogroup"[^>]+aria-labelledby="theme-label"' || fail 'theme selector must be an accessible footer control'
+printf '%s' "$FOOTER" | grep -Eq 'id="theme-label">theme:<' || fail 'theme selector needs a visible label'
+if printf '%s' "$HEADER" | grep -Eq 'theme-picker|theme-system|theme-light|theme-dark'; then
+  fail 'theme selector must not compete with primary navigation'
+fi
 [ "$(grep -Ec 'type="radio"[[:space:]]+name="theme"' "$FILE")" -eq 3 ] || fail 'theme selector must expose system, light, and dark choices'
 require 'id="theme-system"[^>]+checked' 'system theme must remain the default'
 require ':root:has\(#theme-light:checked\)' 'light override must be CSS-only'
