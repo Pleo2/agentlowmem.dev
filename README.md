@@ -10,6 +10,7 @@ The public website for [Agent Lowmem](https://github.com/Pleo2/agent-lowmem): a 
 - less than 15 KiB after gzip compression;
 - system-adaptive light and dark themes;
 - no continuous animation.
+- one bounded, read-only GitHub API integration documented without token handling.
 
 ## Preview
 
@@ -32,6 +33,8 @@ The initial release remains one lightweight landing page. Future work is tracked
 
 ### Before the CLI release
 
+- [x] Publish the verified `support@agentlowmem.dev` contact route.
+- [x] Document the bounded `agent-lowmem github inspect --json` integration.
 - [ ] Select licenses for the CLI and website repositories without assuming MIT in advance.
 - [ ] Record reproducible landing-release evidence: commit, deployment, compressed size, response headers, and Lighthouse results.
 - [ ] Complete the final Safari, Chrome, mobile-width, 200% zoom, and theme review.
