@@ -75,13 +75,8 @@
     .managed { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); }
     .section-label { margin: 0 0 .85rem; color: var(--accent-solid); font-size: .68rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
     .managed-title { max-width: 34rem; margin: 0; color: var(--text); font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.35; letter-spacing: -.035em; }
-    .flow { position: relative; margin-top: 2rem; border-block: 1px solid var(--line); }
-    .flow::before { content: ""; position: absolute; top: 1.6rem; bottom: 1.6rem; left: .72rem; width: 1px; background: var(--gradient); opacity: .7; }
-    .flow-step { position: relative; display: grid; grid-template-columns: 2.7rem 1fr; gap: .75rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
-    .flow-step:last-child { border-bottom: 0; }
-    .flow-number { z-index: 1; align-self: start; width: 1.5rem; background: var(--bg); color: var(--accent-solid); font-size: .7rem; font-weight: 600; }
-    .flow-step strong { display: block; color: var(--text); font-size: .82rem; font-weight: 600; }
-    .flow-step span:last-child { display: block; margin-top: .2rem; color: var(--faint); font-size: .75rem; }
+    .execution-trace { margin: 2rem 0 0; padding: 1.5rem 0; border-block: 1px solid var(--line); background: transparent; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(.7rem, 2vw, .79rem); }
+    .trace-key { display: inline-block; width: 10ch; color: var(--faint); }
     .definition { margin: 2.25rem 0 0; }
     .definition strong { color: var(--text); font-weight: 600; }
     .comparison { margin-top: 2rem; border-block: 1px solid var(--line); }
@@ -119,7 +114,7 @@
       }
     }
     @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-      .brand::after, .prompt, .ok, .section-label, .flow-number, .comparison-row:last-child .comparison-label {
+      .brand::after, .prompt, .ok, .section-label, .comparison-row:last-child .comparison-label {
         background: var(--gradient);
         color: transparent;
         background-clip: text;
@@ -170,14 +165,15 @@ cleanup    owned process group
     <section class="managed" aria-labelledby="managed-title">
       <p class="section-label">How it works</p>
       <h2 class="managed-title" id="managed-title">One guarded path from agent request to cleanup.</h2>
-      <div class="flow" role="list" aria-label="Managed execution flow">
-        <div class="flow-step" role="listitem"><span class="flow-number">01</span><div><strong>Agent requests <code>run test</code></strong><span>A supported operation enters one narrow execution path.</span></div></div>
-        <div class="flow-step" role="listitem"><span class="flow-number">02</span><div><strong>Validate the operation</strong><span>Repository evidence and the selected adapter are checked first.</span></div></div>
-        <div class="flow-step" role="listitem"><span class="flow-number">03</span><div><strong>Acquire the global lock</strong><span>Other managed heavy work waits instead of competing for memory.</span></div></div>
-        <div class="flow-step" role="listitem"><span class="flow-number">04</span><div><strong>Launch npm or pnpm safely</strong><span>Verified low-concurrency arguments are applied without a shell string.</span></div></div>
-        <div class="flow-step" role="listitem"><span class="flow-number">05</span><div><strong>Supervise time and signals</strong><span>The run stays visible, bounded, and interruptible.</span></div></div>
-        <div class="flow-step" role="listitem"><span class="flow-number">06</span><div><strong>Clean up and release</strong><span>Only the owned process group is stopped before the lock is released.</span></div></div>
-      </div>
+      <pre class="execution-trace" aria-label="Managed execution trace"><span class="prompt">$</span> <span class="bright">agent-lowmem run test</span>
+
+<span class="trace-key">inspect</span>package.json + lockfile
+<span class="trace-key">policy</span>test · one worker · no watch
+<span class="trace-key">lock</span>acquired
+<span class="trace-key">launch</span>pnpm test
+<span class="trace-key">supervise</span>timeout 15m · signals enabled
+<span class="trace-key">cleanup</span>process group released
+<span class="ok">result</span>    completed</pre>
       <p class="definition"><strong>A managed runner is a supervisor for heavy commands.</strong> It does not replace Vitest, Jest, Next.js, npm, or pnpm—it wraps them and controls their lifecycle.</p>
       <div class="comparison" aria-label="Execution comparison">
         <div class="comparison-row"><span class="comparison-label">without</span><code>agent → npm test → process fan-out → memory pressure</code></div>

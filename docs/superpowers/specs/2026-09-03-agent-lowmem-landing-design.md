@@ -29,7 +29,7 @@ Version one contains one route, `/`, with this content order:
 3. A concise explanation of the native CLI and its target user.
 4. A primary “Follow the build on GitHub” action.
 5. A representative, non-interactive `agent-lowmem doctor` terminal transcript.
-6. A six-step managed-execution trace from agent request through owned cleanup.
+6. A compact terminal trace showing inspection, policy, lock, launch, supervision, and owned cleanup.
 7. A concise managed-runner definition and `without / with` comparison.
 8. Four short capability descriptions: global serialization, no-watch execution, bounded time, and owned-process cleanup.
 9. An honest release line: `v0.1 · early development · macOS arm64`.
