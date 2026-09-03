@@ -95,6 +95,7 @@
     .typed-command { display: inline-block; vertical-align: bottom; white-space: nowrap; }
     .sequence-steps { display: grid; gap: .18rem; margin: 0; padding: 0; list-style: none; }
     .sequence-step { display: grid; grid-template-columns: .8rem 9ch minmax(0, 1fr); gap: .6rem; align-items: baseline; }
+    .result-line { grid-column: 2 / -1; display: inline-block; width: 16ch; white-space: nowrap; }
     .step-loader { position: relative; width: .7rem; height: .7rem; align-self: center; }
     .step-loader::before, .step-loader::after { position: absolute; inset: 0; display: grid; place-items: center; }
     .step-loader::before { content: ""; border: 1px solid var(--accent-solid); border-right-color: transparent; border-radius: 50%; opacity: 0; }
@@ -110,8 +111,9 @@
       .doctor-typed { --typed-width: 19ch; animation: type-command .8s steps(19, end) .7s forwards, caret-off .01s linear 1.5s forwards; }
       .run-typed { --typed-width: 21ch; animation: type-command .9s steps(21, end) 4.15s forwards, caret-off .01s linear 5.05s forwards; }
       .sequence-step { opacity: 0; animation: step-reveal .01s linear var(--delay) forwards; }
-      .step-loader::before { opacity: 1; animation: loader-spin .38s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .38s) forwards; }
-      .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .38s) forwards; }
+      .step-loader::before { opacity: 1; animation: loader-spin .52s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .52s) forwards; }
+      .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .52s) forwards; }
+      .typed-result { --typed-width: 16ch; width: 0; overflow: hidden; border-right: 1px solid var(--accent-solid); animation: type-command 1s steps(16, end) 9.67s forwards, caret-off .01s linear 10.67s forwards; }
     }
     @keyframes doctor-reveal { to { visibility: visible; } }
     @keyframes doctor-row-reveal { to { max-height: 2rem; } }
@@ -225,13 +227,13 @@
         <div class="run-sequence" aria-label="Managed test execution sequence">
           <code class="sequence-command"><span class="prompt">$</span> <span class="bright typed-command run-typed">agent-lowmem run test</span></code>
           <ol class="sequence-steps">
-            <li class="sequence-step" style="--delay: 5.1s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
-            <li class="sequence-step" style="--delay: 5.55s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
-            <li class="sequence-step" style="--delay: 6s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
-            <li class="sequence-step" style="--delay: 6.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
-            <li class="sequence-step" style="--delay: 6.9s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
-            <li class="sequence-step" style="--delay: 7.35s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
-            <li class="sequence-step" style="--delay: 7.8s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
+            <li class="sequence-step" style="--delay: 5.2s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
+            <li class="sequence-step" style="--delay: 5.85s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
+            <li class="sequence-step" style="--delay: 6.5s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
+            <li class="sequence-step" style="--delay: 7.15s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
+            <li class="sequence-step" style="--delay: 7.8s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
+            <li class="sequence-step" style="--delay: 8.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
+            <li class="sequence-step result-step" style="--delay: 9.15s"><span class="step-loader" aria-hidden="true"></span><span class="result-line typed-result"><code class="trace-key">result</code> <span>completed</span></span></li>
           </ol>
         </div>
       </div>
