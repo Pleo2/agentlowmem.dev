@@ -5,6 +5,7 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 INDEX="$ROOT/index.html"
 ROBOTS="$ROOT/robots.txt"
 SITEMAP="$ROOT/sitemap.xml"
+VERCEL="$ROOT/vercel.json"
 
 fail() {
   echo "prerelease public contract: $1" >&2
@@ -18,6 +19,7 @@ grep -Eq '^User-agent:[[:space:]]*\*$' "$ROBOTS" || fail 'robots.txt must addres
 grep -Eq '^Allow:[[:space:]]*/$' "$ROBOTS" || fail 'robots.txt must allow the public landing'
 grep -Eq '^Sitemap:[[:space:]]*https://agentlowmem\.dev/sitemap\.xml$' "$ROBOTS" || fail 'robots.txt must advertise the canonical sitemap'
 grep -Eq '<loc>https://agentlowmem\.dev/</loc>' "$SITEMAP" || fail 'sitemap must contain the canonical landing URL'
+grep -Eq "connect-src 'self'" "$VERCEL" || fail 'CSP must permit same-origin robots discovery'
 
 if grep -Eq 'href="https://github\.com/Pleo2/agent-lowmem(["/#?])' "$INDEX"; then
   fail 'public page must not link to the private CLI repository'
