@@ -60,20 +60,20 @@ Validation scripts may be added as development-only files when they measurably e
 
 ## 5. Visual system
 
-The interface uses a warm black background, ivory foreground, restrained neutral text, thin borders, small corner radii, and a low-saturation orange pressure-state accent. A light palette is defined with the same hierarchy.
+The interface uses a warm black background, ivory foreground, restrained neutral text, thin borders, and a narrow vertical reading column. A CSS-only lavender-to-indigo-to-cyan gradient accents only the wordmark cursor, status dot, primary-link underline, terminal prompt, and ready state. A light palette uses darker stops with the same hierarchy.
 
 The browser selects the palette with `prefers-color-scheme`. The document declares support for both color schemes. Theme adaptation requires no script, control, local storage, cookie, or initial flash.
 
-Display text, navigation, terminal output, and metrics use this local-first monospace stack:
+All landing-page text uses this local-first monospace stack:
 
 ```css
 "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 "Liberation Mono", monospace
 ```
 
-No JetBrains Mono file is downloaded. A device with the font installed uses it; other devices use their native monospace face. Body copy uses `system-ui`, `-apple-system`, `BlinkMacSystemFont`, and platform fallbacks. Typography fidelity never takes priority over first-load cost.
+No JetBrains Mono file is downloaded. A device with the font installed uses it; other devices use their native monospace face. A system sans stack is reserved for future long-form documentation or blog content and is not used by the initial landing. Typography fidelity never takes priority over first-load cost.
 
-The wordmark is textual: `agent_lowmem`. A short entrance treatment may move a terminal line or cursor once and then stop. The page must perform no continuous animation after its initial presentation. `prefers-reduced-motion: reduce` removes the entrance treatment entirely.
+The wordmark is textual: `agent_lowmem`. The primary action is an underlined text link rather than a bordered or filled button. A short entrance treatment may move the terminal once and then stop. The page must perform no continuous animation after its initial presentation. `prefers-reduced-motion: reduce` removes the entrance treatment entirely.
 
 ## 6. Interaction and responsive behavior
 

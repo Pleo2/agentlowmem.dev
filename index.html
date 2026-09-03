@@ -23,10 +23,9 @@
       --muted: #aaa49a;
       --faint: #777168;
       --line: #292622;
-      --accent: #d76b4b;
-      --accent-soft: #362019;
+      --accent-solid: #7185ff;
+      --gradient: linear-gradient(120deg, #c9b6ff 0%, #8b83ff 38%, #4f6cff 70%, #50d8ff 100%);
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color-scheme: dark;
     }
     * { box-sizing: border-box; }
@@ -35,13 +34,13 @@
       margin: 0;
       background: var(--bg);
       color: var(--muted);
-      font: 400 1rem/1.7 var(--sans);
+      font: 400 .93rem/1.75 var(--mono);
       text-rendering: optimizeLegibility;
     }
     a { color: inherit; text-underline-offset: .25em; }
     a:hover { color: var(--text); }
-    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
-    .shell { width: min(100% - 2.5rem, 72rem); margin-inline: auto; }
+    a:focus-visible { outline: 2px solid var(--accent-solid); outline-offset: 5px; border-radius: 2px; }
+    .shell { width: min(100% - 2.5rem, 42.5rem); margin-inline: auto; }
     .nav {
       min-height: 4.5rem;
       display: flex;
@@ -51,39 +50,42 @@
       font: 500 .78rem/1 var(--mono);
     }
     .brand { color: var(--text); text-decoration: none; letter-spacing: -.03em; }
-    .brand::after { content: "_"; color: var(--accent); }
+    .brand::after { content: "_"; color: var(--accent-solid); }
     .nav-meta { display: flex; align-items: center; gap: 1.25rem; }
     .status { color: var(--faint); }
-    .status::before { content: ""; display: inline-block; width: .45rem; height: .45rem; margin-right: .45rem; border-radius: 50%; background: var(--accent); }
-    main { padding: clamp(4.5rem, 11vw, 8rem) 0 6rem; }
-    .hero { max-width: 49rem; }
-    .eyebrow { margin: 0 0 1.25rem; color: var(--accent); font: 600 .72rem/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-    h1 { margin: 0; color: var(--text); font: 600 clamp(2.8rem, 8vw, 6.6rem)/.94 var(--mono); letter-spacing: -.075em; }
-    .lede { max-width: 42rem; margin: 2rem 0 0; font-size: clamp(1.05rem, 2vw, 1.28rem); color: var(--muted); }
+    .status::before { content: ""; display: inline-block; width: .45rem; height: .45rem; margin-right: .45rem; border-radius: 50%; background: var(--gradient); }
+    main { padding: clamp(4rem, 10vw, 7rem) 0 6rem; }
+    .hero { max-width: 42.5rem; }
+    .eyebrow { margin: 0 0 1.25rem; color: var(--accent-solid); font: 600 .7rem/1.4 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+    h1 { margin: 0; color: var(--text); font: 600 clamp(2.7rem, 8vw, 5rem)/.98 var(--mono); letter-spacing: -.065em; }
+    .lede { max-width: 39rem; margin: 2rem 0 0; font-size: clamp(.95rem, 2vw, 1.08rem); color: var(--muted); }
     .actions { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.15rem; }
-    .primary { display: inline-flex; min-height: 2.9rem; align-items: center; padding: 0 1rem; border: 1px solid var(--accent); color: var(--text); background: var(--accent-soft); font: 600 .78rem/1 var(--mono); text-decoration: none; }
-    .primary::after { content: " ↗"; margin-left: .6rem; color: var(--accent); }
+    .primary { position: relative; display: inline-block; padding: .35rem 0; color: var(--text); font: 600 .78rem/1.4 var(--mono); text-decoration: none; }
+    .primary::before { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--gradient); }
+    .primary::after { content: " ↗"; margin-left: .35rem; color: var(--accent-solid); }
     .release { color: var(--faint); font: 400 .72rem/1.5 var(--mono); }
-    .terminal { max-width: 49rem; margin-top: clamp(4rem, 9vw, 7rem); border: 1px solid var(--line); background: var(--surface); }
+    .terminal { max-width: 42.5rem; margin-top: clamp(4rem, 9vw, 6rem); border-block: 1px solid var(--line); background: var(--surface); }
     .terminal-bar { display: flex; align-items: center; justify-content: space-between; min-height: 2.75rem; padding: 0 1rem; border-bottom: 1px solid var(--line); color: var(--faint); font: 400 .7rem/1 var(--mono); }
     .lights { letter-spacing: .28em; color: var(--line); }
     pre { margin: 0; padding: clamp(1.25rem, 4vw, 2rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.72rem, 2vw, .84rem)/1.85 var(--mono); }
-    .prompt, .ok { color: var(--accent); }
+    .prompt, .ok { color: var(--accent-solid); }
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-    .features { max-width: 49rem; margin-top: clamp(5rem, 10vw, 8rem); border-top: 1px solid var(--line); }
-    .feature { display: grid; grid-template-columns: minmax(8rem, 13rem) 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--line); }
+    .features { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); border-top: 1px solid var(--line); }
+    .feature { padding: 2rem 0; border-bottom: 1px solid var(--line); }
     h2 { margin: 0; color: var(--text); font: 600 .8rem/1.5 var(--mono); }
-    .feature p { margin: 0; }
+    .feature p { margin: .45rem 0 0; }
     footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--faint); font: 400 .7rem/1.5 var(--mono); }
     footer nav { display: flex; gap: 1.2rem; }
     @media (max-width: 38rem) {
-      .shell { width: min(100% - 1.5rem, 72rem); }
+      .shell { width: min(100% - 1.5rem, 42.5rem); }
       .nav-meta { gap: .85rem; }
       .status { font-size: 0; }
       .status::before { margin: 0; }
-      .feature { grid-template-columns: 1fr; gap: .65rem; }
+    }
+    @media (min-width: 70rem) {
+      .shell { margin-left: 2rem; margin-right: 0; }
     }
     @media (prefers-color-scheme: light) {
       :root {
@@ -93,9 +95,17 @@
         --muted: #5f5a52;
         --faint: #777168;
         --line: #d5cfc5;
-        --accent: #a84227;
-        --accent-soft: #eddbd3;
+        --accent-solid: #4557c7;
+        --gradient: linear-gradient(120deg, #7651b8 0%, #594ad0 38%, #3154c7 70%, #087b9d 100%);
         color-scheme: light;
+      }
+    }
+    @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+      .brand::after, .prompt, .ok {
+        background: var(--gradient);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
       }
     }
     @media (prefers-reduced-motion: reduce) {
