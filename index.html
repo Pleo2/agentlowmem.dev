@@ -21,7 +21,7 @@
       --surface: #11100e;
       --text: #f1eee8;
       --muted: #aaa49a;
-      --faint: #777168;
+      --faint: #837d73;
       --line: #292622;
       --accent-solid: #7185ff;
       --gradient: linear-gradient(120deg, #c9b6ff 0%, #8b83ff 38%, #4f6cff 70%, #50d8ff 100%);
@@ -56,46 +56,44 @@
     .status::before { content: ""; display: inline-block; width: .45rem; height: .45rem; margin-right: .45rem; border-radius: 50%; background: var(--gradient); }
     main { padding: clamp(4rem, 10vw, 7rem) 0 6rem; }
     .hero { max-width: 42.5rem; }
-    .eyebrow { margin: 0 0 1.25rem; color: var(--accent-solid); font: 600 .7rem/1.4 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+    .eyebrow { margin: 0 0 1.25rem; color: var(--accent-solid); font: 600 .75rem/1.4 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
     h1 { margin: 0; color: var(--text); font: 600 clamp(2.7rem, 8vw, 5rem)/.98 var(--mono); letter-spacing: -.065em; }
     .lede { max-width: 39rem; margin: 2rem 0 0; font-size: clamp(.95rem, 2vw, 1.08rem); color: var(--muted); }
     .actions { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.15rem; }
     .primary { position: relative; display: inline-block; padding: .35rem 0; color: var(--text); font: 600 .78rem/1.4 var(--mono); text-decoration: none; }
     .primary::before { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--gradient); }
     .primary::after { content: " ↗"; margin-left: .35rem; color: var(--accent-solid); }
-    .release { color: var(--faint); font: 400 .72rem/1.5 var(--mono); }
+    .release { color: var(--faint); font: 400 .75rem/1.5 var(--mono); }
     .terminal { max-width: 42.5rem; margin-top: clamp(4rem, 9vw, 6rem); border-block: 1px solid var(--line); background: var(--surface); }
-    .terminal-bar { display: flex; align-items: center; justify-content: space-between; min-height: 2.75rem; padding: 0 1rem; border-bottom: 1px solid var(--line); color: var(--faint); font: 400 .7rem/1 var(--mono); }
+    .terminal-bar { display: flex; align-items: center; justify-content: space-between; min-height: 2.75rem; padding: 0 1rem; border-bottom: 1px solid var(--line); color: var(--faint); font: 400 .75rem/1 var(--mono); }
     .lights { letter-spacing: .28em; color: var(--line); }
-    pre { margin: 0; padding: clamp(1.25rem, 4vw, 2rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.72rem, 2vw, .84rem)/1.85 var(--mono); }
+    pre { margin: 0; padding: clamp(1.25rem, 4vw, 2rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
     .prompt, .ok { color: var(--accent-solid); }
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     .managed { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); }
-    .section-label { margin: 0 0 .85rem; color: var(--accent-solid); font-size: .68rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
+    .section-label { margin: 0 0 .85rem; color: var(--accent-solid); font-size: .75rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
     .managed-title { max-width: 34rem; margin: 0; color: var(--text); font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.35; letter-spacing: -.035em; }
-    .execution-trace { margin: 2rem 0 0; padding: 1.5rem 0; border-block: 1px solid var(--line); background: transparent; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(.7rem, 2vw, .79rem); }
+    .execution-trace { margin: 2rem 0 0; padding: 1.5rem 0; border-block: 1px solid var(--line); background: transparent; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(.75rem, 2vw, .79rem); }
     .trace-key { display: inline-block; width: 10ch; color: var(--faint); }
     .definition { margin: 2.25rem 0 0; }
     .definition strong { color: var(--text); font-weight: 600; }
     .comparison { margin-top: 2rem; border-block: 1px solid var(--line); }
     .comparison-row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; }
     .comparison-row + .comparison-row { border-top: 1px solid var(--line); }
-    .comparison-label { color: var(--faint); font-size: .7rem; }
+    .comparison-label { color: var(--faint); font-size: .75rem; }
     .comparison-row:last-child .comparison-label { color: var(--accent-solid); }
     .comparison code { color: var(--muted); font: inherit; font-size: .75rem; overflow-wrap: anywhere; }
     .features { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); border-top: 1px solid var(--line); }
     .feature { padding: 2rem 0; border-bottom: 1px solid var(--line); }
     h2 { margin: 0; color: var(--text); font: 600 .8rem/1.5 var(--mono); }
     .feature p { margin: .45rem 0 0; }
-    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--faint); font: 400 .7rem/1.5 var(--mono); }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--faint); font: 400 .75rem/1.5 var(--mono); }
     footer nav { display: flex; gap: 1.2rem; }
     @media (max-width: 38rem) {
       .shell { width: min(100% - 1.5rem, 42.5rem); }
       .nav-meta { gap: .85rem; }
-      .status { font-size: 0; }
-      .status::before { margin: 0; }
     }
     @media (min-width: 70rem) {
       .shell { margin-left: 2rem; margin-right: 0; }
@@ -106,7 +104,7 @@
         --surface: #ece8e0;
         --text: #171410;
         --muted: #5f5a52;
-        --faint: #777168;
+        --faint: #69635a;
         --line: #d5cfc5;
         --accent-solid: #4557c7;
         --gradient: linear-gradient(120deg, #7651b8 0%, #594ad0 38%, #3154c7 70%, #087b9d 100%);
@@ -130,7 +128,7 @@
 <body>
   <header class="shell">
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="/" aria-label="Agent Lowmem home">agent_lowmem</a>
+      <a class="brand" href="/">agent_lowmem</a>
       <div class="nav-meta">
         <span class="status">early development</span>
         <a href="https://github.com/Pleo2/agent-lowmem">source</a>
@@ -139,7 +137,7 @@
   </header>
   <main class="shell">
     <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">Native policy runner for macOS</p>
+      <p class="eyebrow">Native Rust policy runner for macOS</p>
       <h1 id="hero-title">More agents.<br>Less RAM.</h1>
       <p class="lede">Agent Lowmem keeps agent-launched validation predictable on memory-constrained Apple Silicon Macs—one managed heavy operation at a time.</p>
       <div class="actions">

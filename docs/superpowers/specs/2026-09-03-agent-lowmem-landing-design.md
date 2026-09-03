@@ -25,7 +25,7 @@ The visual reference is the restraint and technical clarity of `fx.sh`, not its 
 Version one contains one route, `/`, with this content order:
 
 1. Minimal navigation with the Agent Lowmem wordmark, source link, and status.
-2. Hero with the headline “More agents. Less RAM.”
+2. Hero with the headline “More agents. Less RAM.” and the eyebrow “Native Rust policy runner for macOS”.
 3. A concise explanation of the native CLI and its target user.
 4. A primary “Follow the build on GitHub” action.
 5. A representative, non-interactive `agent-lowmem doctor` terminal transcript.
@@ -90,6 +90,8 @@ Focus states are always visible. Every interactive element has a clear accessibl
 The document uses semantic landmarks, one `h1`, ordered heading levels, descriptive links, and a language declaration. Decorative terminal marks are hidden from accessibility APIs when they add no meaning. Terminal content that communicates product behavior remains readable text.
 
 Both palettes must meet WCAG 2.2 AA contrast for normal text and interactive states. The page must remain navigable by keyboard at 200% zoom and must not rely on color alone to express status.
+
+All visible auxiliary labels use at least 12 CSS pixels at the default root size. The textual home link uses its visible `agent_lowmem` content as its accessible name rather than overriding it with a divergent ARIA label.
 
 ## 8. Performance contract
 
