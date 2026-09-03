@@ -18,5 +18,10 @@ grep -Eq 'h1[[:space:]]*\{[^}]*font:[^;]*clamp\(\.95rem,[[:space:]]*2vw,[[:space
 grep -Eq 'h1[[:space:]]*\{[^}]*font:[[:space:]]*500[[:space:]]' "$FILE" || fail 'headline must use the lighter 500 weight'
 grep -Eq '\.section-label[[:space:]]*\{[^}]*font-weight:[[:space:]]*500' "$FILE" || fail 'section label must use the lighter 500 weight'
 grep -Eq 'h2[[:space:]]*\{[^}]*font:[[:space:]]*500[[:space:]]' "$FILE" || fail 'section titles must use the lighter 500 weight'
+if grep -Eq '\.shell[[:space:]]*\{[^}]*margin-left:[[:space:]]*2rem' "$FILE"; then
+  fail 'desktop shell must remain centered'
+fi
+grep -Eq 'main[[:space:]]*\{[^}]*padding:[[:space:]]*clamp\(2\.5rem,[[:space:]]*5vw,[[:space:]]*3rem\)[[:space:]]+0[[:space:]]+6rem' "$FILE" || fail 'desktop hero must not have excessive top padding'
+grep -Eq '\.terminal[[:space:]]*\{[^}]*margin-top:[[:space:]]*clamp\(3rem,[[:space:]]*6vw,[[:space:]]*4rem\)' "$FILE" || fail 'terminal must follow the hero without excessive whitespace'
 
 echo "hero contract passed"
