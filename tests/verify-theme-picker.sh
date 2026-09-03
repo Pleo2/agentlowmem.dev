@@ -19,6 +19,8 @@ require() {
 
 printf '%s' "$FOOTER" | grep -Eq 'class="theme-picker"[^>]+role="radiogroup"[^>]+aria-labelledby="theme-label"' || fail 'theme selector must be an accessible footer control'
 printf '%s' "$FOOTER" | grep -Eq 'id="theme-label">theme:<' || fail 'theme selector needs a visible label'
+printf '%s' "$FOOTER" | grep -Eq 'class="footer-tools"' || fail 'footer links and theme selector need a stable vertical group'
+require '\.footer-tools[^\{]*\{[^}]*flex-direction:[[:space:]]*column' 'footer controls must stack instead of crowding one row'
 if printf '%s' "$HEADER" | grep -Eq 'theme-picker|theme-system|theme-light|theme-dark'; then
   fail 'theme selector must not compete with primary navigation'
 fi
@@ -32,5 +34,11 @@ require '\.shell[^\{]*\{[^}]*width:[[:space:]]*min\(calc\(100%[[:space:]]*-[[:sp
 if grep -Eiq '<script([[:space:]>])|localStorage|sessionStorage|document\.' "$FILE"; then
   fail 'theme selection must not introduce JavaScript or browser storage'
 fi
+
+if printf '%s' "$FOOTER" | grep -Eiq '\bMIT\b|/LICENSE'; then
+  fail 'footer must not claim an undecided project license'
+fi
+
+[ ! -f "$ROOT/LICENSE" ] || fail 'landing must not ship an unapproved project license'
 
 echo "theme picker contract passed"

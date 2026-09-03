@@ -59,8 +59,8 @@
     .brand { color: var(--text); text-decoration: none; letter-spacing: -.03em; }
     .brand::after { content: "_"; color: var(--accent-solid); }
     .nav-meta { display: flex; align-items: center; gap: 1.25rem; }
-    .theme-picker { display: flex; gap: .65rem; margin: 0; padding: 0; border: 0; }
-    .theme-label { color: var(--muted); }
+    .theme-picker { display: flex; gap: .8rem; margin: 0; padding: 0; border: 0; }
+    .theme-label { margin-right: .15rem; color: var(--muted); }
     .theme-input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     .theme-picker label { position: relative; padding: .35rem 0; color: var(--faint); cursor: pointer; }
     .theme-picker label::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--gradient); opacity: 0; }
@@ -148,13 +148,14 @@
     .feature p { margin: .45rem 0 0; }
     footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--faint); font: 400 .75rem/1.5 var(--mono); }
     footer nav { display: flex; gap: 1.2rem; }
+    .footer-tools { display: flex; flex-direction: column; align-items: flex-end; gap: .75rem; margin-left: auto; }
     @media (max-width: 38rem) {
       .shell { width: min(calc(100% - 1.5rem), 42.5rem); }
       .nav-meta { gap: .85rem; }
       .status { display: none; }
       .terminal-body { height: 22rem; }
       footer { align-items: flex-start; }
-      footer .theme-picker { order: 3; flex-basis: 100%; }
+      .footer-tools { flex-basis: 100%; align-items: flex-start; margin-left: 0; }
     }
     @media (min-width: 70rem) {
       .shell { margin-left: 2rem; margin-right: 0; }
@@ -303,13 +304,15 @@
   </main>
   <footer class="shell">
     <span>Built for constrained machines.</span>
-    <div class="theme-picker" role="radiogroup" aria-labelledby="theme-label">
-      <span class="theme-label" id="theme-label">theme:</span>
-      <input class="theme-input" type="radio" name="theme" id="theme-system" checked><label for="theme-system">system</label>
-      <input class="theme-input" type="radio" name="theme" id="theme-light"><label for="theme-light">light</label>
-      <input class="theme-input" type="radio" name="theme" id="theme-dark"><label for="theme-dark">dark</label>
+    <div class="footer-tools">
+      <nav aria-label="Footer navigation"><a href="https://github.com/Pleo2/agentlowmem.dev">source</a></nav>
+      <div class="theme-picker" role="radiogroup" aria-labelledby="theme-label">
+        <span class="theme-label" id="theme-label">theme:</span>
+        <input class="theme-input" type="radio" name="theme" id="theme-system" checked><label for="theme-system">system</label>
+        <input class="theme-input" type="radio" name="theme" id="theme-light"><label for="theme-light">light</label>
+        <input class="theme-input" type="radio" name="theme" id="theme-dark"><label for="theme-dark">dark</label>
+      </div>
     </div>
-    <nav aria-label="Footer navigation"><a href="https://github.com/Pleo2/agentlowmem.dev">source</a><a href="https://github.com/Pleo2/agentlowmem.dev/blob/main/LICENSE">MIT license</a></nav>
   </footer>
 </body>
 </html>
