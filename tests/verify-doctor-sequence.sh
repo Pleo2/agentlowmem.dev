@@ -21,6 +21,10 @@ grep -Eq '@keyframes[[:space:]]+doctor-exit' "$FILE" || fail 'missing doctor exi
 grep -Eq '\.doctor-row[^\{]*\{[^}]*animation:' "$FILE" || fail 'doctor rows must reveal progressively'
 grep -Eq '\.doctor-sequence[[:space:]]*\{[^}]*display:[[:space:]]*none' "$FILE" || fail 'reduced-motion state must skip doctor animation'
 
+if grep -Eq '@keyframes[[:space:]]+doctor-exit[^}]*opacity' "$FILE"; then
+  fail 'doctor exit must preserve text contrast while collapsing'
+fi
+
 if grep -Eq '<script([[:space:]>])' "$FILE"; then
   fail 'doctor sequence must not require JavaScript'
 fi
