@@ -27,7 +27,7 @@ Version one contains one route, `/`, with this content order:
 1. Minimal navigation with the Agent Lowmem wordmark, source link, and status.
 2. Hero with the headline “More agents. Less RAM.” and the eyebrow “Native Rust policy runner for macOS”.
 3. A concise explanation of the native CLI and its target user.
-4. A primary “Follow the build on GitHub” action.
+4. A primary “Follow Pleo2 on GitHub” action while the CLI repository remains private.
 5. A representative terminal session combining `agent-lowmem doctor` with a non-interactive managed run.
 6. A compact trace inside that window showing inspection, policy, lock, launch, supervision, owned cleanup, and the final result.
 7. A concise managed-runner definition and `without / with` comparison.
@@ -39,7 +39,7 @@ The page must not publish a non-working installation command. Once a real CLI re
 
 ## 3. Future scope
 
-Future versions may add `docs`, `lib`, `source`, and `blog`. The initial information architecture must leave room for these destinations, but the first release must not display dead links or empty routes. `source` links directly to `https://github.com/Pleo2/agent-lowmem`.
+Future versions may add `docs`, `lib`, `source`, and `blog`. The initial information architecture must leave room for these destinations, but the first release must not display dead links or empty routes. Before the CLI repository is public, `source` links to the public landing repository at `https://github.com/Pleo2/agentlowmem.dev`; the primary action links to the public Pleo2 profile. Once the CLI repository is public, product-source links may point directly to it.
 
 When multiple content routes become necessary, the project may adopt a static-site generator. That migration must preserve static output, progressive enhancement, and the performance contract unless a reviewed requirement justifies an exception.
 
@@ -115,7 +115,7 @@ The repository must include a deterministic check that fails when the compressed
 
 ## 9. Metadata and discoverability
 
-The page title, description, canonical URL, Open Graph text, and X card text describe Agent Lowmem accurately. Because images are excluded from the first release, metadata must not reference a generic or missing preview image.
+The page title, description, canonical URL, Open Graph text, and X card text describe Agent Lowmem accurately. A minimal `robots.txt` permits public indexing and advertises a one-URL canonical `sitemap.xml`. Because images are excluded from the first release, metadata must not reference a generic or missing preview image.
 
 The page includes minimal structured data for an open-source developer tool only when every declared property is already factual. It must not advertise an installer, stable release, measured memory savings, or platform support beyond current repository evidence.
 

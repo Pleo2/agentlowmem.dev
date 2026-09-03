@@ -23,6 +23,8 @@ jobs:
         run: ./tests/verify-doctor-sequence.sh
       - name: Verify fixed terminal motion
         run: ./tests/verify-terminal-motion.sh
+      - name: Verify public prerelease surface
+        run: ./tests/verify-prerelease-public.sh
       - name: Verify production page
         if: ${{ hashFiles('index.html') != '' }}
         run: ./scripts/verify-site.sh index.html
