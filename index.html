@@ -72,6 +72,24 @@
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .managed { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); }
+    .section-label { margin: 0 0 .85rem; color: var(--accent-solid); font-size: .68rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
+    .managed-title { max-width: 34rem; margin: 0; color: var(--text); font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.35; letter-spacing: -.035em; }
+    .flow { position: relative; margin-top: 2rem; border-block: 1px solid var(--line); }
+    .flow::before { content: ""; position: absolute; top: 1.6rem; bottom: 1.6rem; left: .72rem; width: 1px; background: var(--gradient); opacity: .7; }
+    .flow-step { position: relative; display: grid; grid-template-columns: 2.7rem 1fr; gap: .75rem; padding: 1.15rem 0; border-bottom: 1px solid var(--line); }
+    .flow-step:last-child { border-bottom: 0; }
+    .flow-number { z-index: 1; align-self: start; width: 1.5rem; background: var(--bg); color: var(--accent-solid); font-size: .7rem; font-weight: 600; }
+    .flow-step strong { display: block; color: var(--text); font-size: .82rem; font-weight: 600; }
+    .flow-step span:last-child { display: block; margin-top: .2rem; color: var(--faint); font-size: .75rem; }
+    .definition { margin: 2.25rem 0 0; }
+    .definition strong { color: var(--text); font-weight: 600; }
+    .comparison { margin-top: 2rem; border-block: 1px solid var(--line); }
+    .comparison-row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; }
+    .comparison-row + .comparison-row { border-top: 1px solid var(--line); }
+    .comparison-label { color: var(--faint); font-size: .7rem; }
+    .comparison-row:last-child .comparison-label { color: var(--accent-solid); }
+    .comparison code { color: var(--muted); font: inherit; font-size: .75rem; overflow-wrap: anywhere; }
     .features { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); border-top: 1px solid var(--line); }
     .feature { padding: 2rem 0; border-bottom: 1px solid var(--line); }
     h2 { margin: 0; color: var(--text); font: 600 .8rem/1.5 var(--mono); }
@@ -101,7 +119,7 @@
       }
     }
     @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-      .brand::after, .prompt, .ok {
+      .brand::after, .prompt, .ok, .section-label, .flow-number, .comparison-row:last-child .comparison-label {
         background: var(--gradient);
         color: transparent;
         background-clip: text;
@@ -147,6 +165,24 @@ watch      denied
 cleanup    owned process group
 
 <span class="ok">ready</span>      focused validation recommended</pre>
+    </section>
+
+    <section class="managed" aria-labelledby="managed-title">
+      <p class="section-label">How it works</p>
+      <h2 class="managed-title" id="managed-title">One guarded path from agent request to cleanup.</h2>
+      <div class="flow" role="list" aria-label="Managed execution flow">
+        <div class="flow-step" role="listitem"><span class="flow-number">01</span><div><strong>Agent requests <code>run test</code></strong><span>A supported operation enters one narrow execution path.</span></div></div>
+        <div class="flow-step" role="listitem"><span class="flow-number">02</span><div><strong>Validate the operation</strong><span>Repository evidence and the selected adapter are checked first.</span></div></div>
+        <div class="flow-step" role="listitem"><span class="flow-number">03</span><div><strong>Acquire the global lock</strong><span>Other managed heavy work waits instead of competing for memory.</span></div></div>
+        <div class="flow-step" role="listitem"><span class="flow-number">04</span><div><strong>Launch npm or pnpm safely</strong><span>Verified low-concurrency arguments are applied without a shell string.</span></div></div>
+        <div class="flow-step" role="listitem"><span class="flow-number">05</span><div><strong>Supervise time and signals</strong><span>The run stays visible, bounded, and interruptible.</span></div></div>
+        <div class="flow-step" role="listitem"><span class="flow-number">06</span><div><strong>Clean up and release</strong><span>Only the owned process group is stopped before the lock is released.</span></div></div>
+      </div>
+      <p class="definition"><strong>A managed runner is a supervisor for heavy commands.</strong> It does not replace Vitest, Jest, Next.js, npm, or pnpm—it wraps them and controls their lifecycle.</p>
+      <div class="comparison" aria-label="Execution comparison">
+        <div class="comparison-row"><span class="comparison-label">without</span><code>agent → npm test → process fan-out → memory pressure</code></div>
+        <div class="comparison-row"><span class="comparison-label">with</span><code>agent → lowmem → policy + lock + supervision → controlled run</code></div>
+      </div>
     </section>
 
     <section class="features" aria-label="Core capabilities">
