@@ -25,6 +25,8 @@ jobs:
         run: ./tests/verify-terminal-motion.sh
       - name: Verify CSS-only theme picker
         run: ./tests/verify-theme-picker.sh
+      - name: Verify restrained hero treatment
+        run: ./tests/verify-hero.sh
       - name: Verify public prerelease surface
         run: ./tests/verify-prerelease-public.sh
       - name: Verify production page

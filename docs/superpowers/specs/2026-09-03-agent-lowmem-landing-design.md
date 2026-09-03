@@ -25,7 +25,7 @@ The visual reference is the restraint and technical clarity of `fx.sh`, not its 
 Version one contains one route, `/`, with this content order:
 
 1. Minimal navigation with the Agent Lowmem wordmark, source link, and status.
-2. Hero with the headline “More agents. Less RAM.” and the eyebrow “Native Rust policy runner for macOS”.
+2. Hero with the restrained monospace headline “More agents. Less RAM.” and “Native Rust policy runner for macOS.” closing the supporting paragraph in bold rather than appearing as a detached eyebrow.
 3. A concise explanation of the native CLI and its target user.
 4. A primary “Follow Pleo2 on GitHub” action while the CLI repository remains private.
 5. A representative terminal session combining `agent-lowmem doctor` with a non-interactive managed run.
