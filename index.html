@@ -78,16 +78,36 @@
     .window-control.zoom { background: #28c840; }
     .window-title { grid-column: 2; color: var(--muted); letter-spacing: -.02em; }
     .window-spacer { grid-column: 3; }
-    pre { margin: 0; padding: clamp(1.5rem, 5vw, 2.25rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
+    .terminal-body { padding: clamp(1.5rem, 5vw, 2.25rem); color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
+    .terminal pre { margin: 0; overflow-x: auto; color: inherit; font: inherit; }
     .prompt, .ok { color: var(--accent-solid); }
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .run-sequence { margin-top: 1.65rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+    .sequence-command { display: block; margin-bottom: 1rem; color: var(--muted); font: inherit; }
+    .sequence-steps { display: grid; gap: .18rem; margin: 0; padding: 0; list-style: none; }
+    .sequence-step { display: grid; grid-template-columns: .8rem 9ch minmax(0, 1fr); gap: .6rem; align-items: baseline; }
+    .step-loader { position: relative; width: .7rem; height: .7rem; align-self: center; }
+    .step-loader::before, .step-loader::after { position: absolute; inset: 0; display: grid; place-items: center; }
+    .step-loader::before { content: ""; border: 1px solid var(--accent-solid); border-right-color: transparent; border-radius: 50%; opacity: 0; }
+    .step-loader::after { content: "✓"; color: var(--accent-solid); font-size: .7rem; font-weight: 700; line-height: 1; }
+    .trace-key { color: var(--faint); }
+    .sequence-step:last-child .trace-key, .sequence-step:last-child .step-loader::after { color: var(--accent-solid); }
+    @media (prefers-reduced-motion: no-preference) {
+      .run-sequence { max-height: 0; margin-top: 0; padding-top: 0; overflow: hidden; border-color: transparent; opacity: 0; animation: sequence-start .3s ease 1s forwards; }
+      .sequence-step { opacity: 0; animation: step-reveal .01s linear var(--delay) forwards; }
+      .step-loader::before { opacity: 1; animation: loader-spin .3s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .3s) forwards; }
+      .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .3s) forwards; }
+    }
+    @keyframes sequence-start { to { max-height: 20rem; margin-top: 1.65rem; padding-top: 1.5rem; border-color: var(--line); opacity: 1; } }
+    @keyframes step-reveal { to { opacity: 1; } }
+    @keyframes loader-spin { to { transform: rotate(1turn); } }
+    @keyframes loader-hide { to { opacity: 0; } }
+    @keyframes check-reveal { to { opacity: 1; } }
     .managed { max-width: 42.5rem; margin-top: clamp(5rem, 10vw, 7rem); }
     .section-label { margin: 0 0 .85rem; color: var(--accent-solid); font-size: .75rem; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
     .managed-title { max-width: 34rem; margin: 0; color: var(--text); font-size: clamp(1.25rem, 4vw, 1.7rem); line-height: 1.35; letter-spacing: -.035em; }
-    .execution-trace { margin: 2rem 0 0; padding: 1.5rem 0; border-block: 1px solid var(--line); background: transparent; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(.75rem, 2vw, .79rem); }
-    .trace-key { display: inline-block; width: 10ch; color: var(--faint); }
     .definition { margin: 2.25rem 0 0; }
     .definition strong { color: var(--text); font-weight: 600; }
     .comparison { margin-top: 2rem; border-block: 1px solid var(--line); }
@@ -162,13 +182,14 @@
       </div>
     </section>
 
-    <section class="terminal" aria-label="Agent Lowmem doctor example">
+    <section class="terminal" aria-label="Agent Lowmem managed terminal example">
       <div class="terminal-bar">
         <span class="window-controls" aria-hidden="true"><span class="window-control close"></span><span class="window-control minimize"></span><span class="window-control zoom"></span></span>
         <span class="window-title">agent-lowmem — doctor</span>
         <span class="window-spacer" aria-hidden="true"></span>
       </div>
-      <pre><span class="prompt">$</span> <span class="bright">agent-lowmem doctor</span>
+      <div class="terminal-body">
+        <pre><span class="prompt">$</span> <span class="bright">agent-lowmem doctor</span>
 
 host       macOS arm64
 profile    Apple M2 · 8 GiB
@@ -178,20 +199,24 @@ watch      denied
 cleanup    owned process group
 
 <span class="ok">ready</span>      focused validation recommended</pre>
+        <div class="run-sequence" aria-label="Managed test execution sequence">
+          <code class="sequence-command"><span class="prompt">$</span> <span class="bright">agent-lowmem run test</span></code>
+          <ol class="sequence-steps">
+            <li class="sequence-step" style="--delay: 1.25s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
+            <li class="sequence-step" style="--delay: 1.65s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
+            <li class="sequence-step" style="--delay: 2.05s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
+            <li class="sequence-step" style="--delay: 2.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
+            <li class="sequence-step" style="--delay: 2.85s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
+            <li class="sequence-step" style="--delay: 3.25s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
+            <li class="sequence-step" style="--delay: 3.65s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
+          </ol>
+        </div>
+      </div>
     </section>
 
     <section class="managed" aria-labelledby="managed-title">
       <p class="section-label">How it works</p>
       <h2 class="managed-title" id="managed-title">One guarded path from agent request to cleanup.</h2>
-      <pre class="execution-trace" aria-label="Managed execution trace"><span class="prompt">$</span> <span class="bright">agent-lowmem run test</span>
-
-<span class="trace-key">inspect</span>package.json + lockfile
-<span class="trace-key">policy</span>test · one worker · no watch
-<span class="trace-key">lock</span>acquired
-<span class="trace-key">launch</span>pnpm test
-<span class="trace-key">supervise</span>timeout 15m · signals enabled
-<span class="trace-key">cleanup</span>process group released
-<span class="ok">result</span>    completed</pre>
       <p class="definition"><strong>A managed runner is a supervisor for heavy commands.</strong> It does not replace Vitest, Jest, Next.js, npm, or pnpm—it wraps them and controls their lifecycle.</p>
       <div class="comparison" aria-label="Execution comparison">
         <div class="comparison-row"><span class="comparison-label">without</span><code>agent → npm test → process fan-out → memory pressure</code></div>

@@ -28,8 +28,8 @@ Version one contains one route, `/`, with this content order:
 2. Hero with the headline “More agents. Less RAM.” and the eyebrow “Native Rust policy runner for macOS”.
 3. A concise explanation of the native CLI and its target user.
 4. A primary “Follow the build on GitHub” action.
-5. A representative, non-interactive `agent-lowmem doctor` terminal transcript.
-6. A compact terminal trace showing inspection, policy, lock, launch, supervision, and owned cleanup.
+5. A representative terminal session combining `agent-lowmem doctor` with a non-interactive managed run.
+6. A compact trace inside that window showing inspection, policy, lock, launch, supervision, owned cleanup, and the final result.
 7. A concise managed-runner definition and `without / with` comparison.
 8. Four short capability descriptions: global serialization, no-watch execution, bounded time, and owned-process cleanup.
 9. An honest release line: `v0.1 · early development · macOS arm64`.
@@ -64,7 +64,7 @@ Validation scripts may be added as development-only files when they measurably e
 
 The interface uses a warm black background, ivory foreground, restrained neutral text, thin borders, and a narrow vertical reading column. A CSS-only lavender-to-indigo-to-cyan gradient accents only the wordmark cursor, status dot, primary-link underline, terminal prompt, and ready state. A light palette uses darker stops with the same hierarchy.
 
-The doctor transcript uses a restrained macOS window treatment: rounder corners, a compact three-zone title bar, decorative traffic-light controls, a centered `agent-lowmem — doctor` title, and shallow border-and-shadow depth. The terminal surface uses 45% opacity and its title bar 55%, integrating the window with the page instead of presenting it as an opaque card. Its title bar suggests the current macOS material hierarchy with a CSS gradient, but avoids `backdrop-filter`, images, and scripts so the terminal remains inexpensive to render.
+The terminal session uses a restrained macOS window treatment: rounder corners, a compact three-zone title bar, decorative traffic-light controls, a centered `agent-lowmem — doctor` title, and shallow border-and-shadow depth. The terminal surface uses 45% opacity and its title bar 55%, integrating the window with the page instead of presenting it as an opaque card. One second after the terminal arrives, the managed-run command appears and its seven states resolve sequentially from a finite loader to a checkmark. The final state clearly reads `result completed`; the sequence never loops. Its title bar suggests the current macOS material hierarchy with a CSS gradient, but avoids `backdrop-filter`, images, scripts, and runtime dependencies so the terminal remains inexpensive to render.
 
 The browser selects the palette with `prefers-color-scheme`. The document declares support for both color schemes. Theme adaptation requires no script, control, local storage, cookie, or initial flash.
 
@@ -77,7 +77,7 @@ All landing-page text uses this local-first monospace stack:
 
 No JetBrains Mono file is downloaded. A device with the font installed uses it; other devices use their native monospace face. A system sans stack is reserved for future long-form documentation or blog content and is not used by the initial landing. Typography fidelity never takes priority over first-load cost.
 
-The wordmark is textual: `agent_lowmem`. The primary action is an underlined text link rather than a bordered or filled button. A short entrance treatment may move the terminal once and then stop. The page must perform no continuous animation after its initial presentation. `prefers-reduced-motion: reduce` removes the entrance treatment entirely.
+The wordmark is textual: `agent_lowmem`. The primary action is an underlined text link rather than a bordered or filled button. A short entrance treatment may move the terminal once and then stop. The managed-run sequence may reveal each state once and must settle completely. The page performs no continuous animation after its initial presentation. `prefers-reduced-motion: reduce` removes the entrance treatment and shows the completed sequence immediately.
 
 ## 6. Interaction and responsive behavior
 
