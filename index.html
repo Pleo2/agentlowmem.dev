@@ -30,6 +30,7 @@
       --window-shadow: rgba(0, 0, 0, .18);
       --accent-solid: #7185ff;
       --gradient: linear-gradient(120deg, #c9b6ff 0%, #8b83ff 38%, #4f6cff 70%, #50d8ff 100%);
+      --result-gradient: linear-gradient(90deg, #c9b6ff 0%, #8b83ff 38%, #4f6cff 70%, #50d8ff 100%);
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       color-scheme: dark;
     }
@@ -101,16 +102,16 @@
     .trace-key { color: var(--faint); }
     .sequence-step:last-child .trace-key, .sequence-step:last-child .step-loader::after { color: var(--accent-solid); }
     @media (prefers-reduced-motion: no-preference) {
-      .doctor-sequence { display: block; max-height: 14rem; overflow: hidden; animation: doctor-exit .3s ease 3.3s forwards; }
+      .doctor-sequence { display: block; max-height: 14rem; overflow: hidden; animation: doctor-exit .35s ease 3.75s forwards; }
       .doctor-command { visibility: hidden; animation: doctor-reveal .01s linear var(--delay) forwards; }
-      .doctor-row { max-height: 0; overflow: hidden; animation: doctor-row-reveal .18s ease var(--delay) forwards; }
-      .run-sequence { visibility: hidden; animation: sequence-start .01s linear 3.65s forwards; }
+      .doctor-row { max-height: 0; overflow: hidden; animation: doctor-row-reveal .22s ease var(--delay) forwards; }
+      .run-sequence { visibility: hidden; animation: sequence-start .01s linear 4.15s forwards; }
       .typed-command { width: 0; overflow: hidden; border-right: 1px solid var(--accent-solid); }
-      .doctor-typed { --typed-width: 19ch; animation: type-command .6s steps(19, end) .7s forwards, caret-off .01s linear 1.3s forwards; }
-      .run-typed { --typed-width: 21ch; animation: type-command .7s steps(21, end) 3.65s forwards, caret-off .01s linear 4.35s forwards; }
+      .doctor-typed { --typed-width: 19ch; animation: type-command .8s steps(19, end) .7s forwards, caret-off .01s linear 1.5s forwards; }
+      .run-typed { --typed-width: 21ch; animation: type-command .9s steps(21, end) 4.15s forwards, caret-off .01s linear 5.05s forwards; }
       .sequence-step { opacity: 0; animation: step-reveal .01s linear var(--delay) forwards; }
-      .step-loader::before { opacity: 1; animation: loader-spin .3s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .3s) forwards; }
-      .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .3s) forwards; }
+      .step-loader::before { opacity: 1; animation: loader-spin .38s linear var(--delay), loader-hide .01s linear calc(var(--delay) + .38s) forwards; }
+      .step-loader::after { opacity: 0; animation: check-reveal .01s linear calc(var(--delay) + .38s) forwards; }
     }
     @keyframes doctor-reveal { to { visibility: visible; } }
     @keyframes doctor-row-reveal { to { max-height: 2rem; } }
@@ -162,6 +163,7 @@
         --window-shadow: rgba(58, 48, 37, .09);
         --accent-solid: #4557c7;
         --gradient: linear-gradient(120deg, #7651b8 0%, #594ad0 38%, #3154c7 70%, #087b9d 100%);
+        --result-gradient: linear-gradient(90deg, #7651b8 0%, #594ad0 38%, #3154c7 70%, #087b9d 100%);
         color-scheme: light;
       }
     }
@@ -172,6 +174,7 @@
         background-clip: text;
         -webkit-background-clip: text;
       }
+      .sequence-step:last-child .trace-key { background: var(--result-gradient); color: transparent; background-clip: text; -webkit-background-clip: text; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -210,25 +213,25 @@
         <div class="doctor-sequence" aria-label="Doctor inspection sequence">
           <code class="doctor-command" style="--delay: .7s"><span class="prompt">$</span> <span class="bright typed-command doctor-typed">agent-lowmem doctor</span></code>
           <dl class="doctor-output">
-            <div class="doctor-row" style="--delay: 1.35s"><dt>host</dt><dd>macOS arm64</dd></div>
-            <div class="doctor-row" style="--delay: 1.55s"><dt>profile</dt><dd>Apple M2 · 8 GiB</dd></div>
-            <div class="doctor-row" style="--delay: 1.75s"><dt>repository</dt><dd>JavaScript / TypeScript</dd></div>
-            <div class="doctor-row" style="--delay: 1.95s"><dt>policy</dt><dd>one heavy operation</dd></div>
-            <div class="doctor-row" style="--delay: 2.15s"><dt>watch</dt><dd>denied</dd></div>
-            <div class="doctor-row" style="--delay: 2.35s"><dt>cleanup</dt><dd>owned process group</dd></div>
-            <div class="doctor-row" style="--delay: 2.55s"><dt>ready</dt><dd>focused validation recommended</dd></div>
+            <div class="doctor-row" style="--delay: 1.55s"><dt>host</dt><dd>macOS arm64</dd></div>
+            <div class="doctor-row" style="--delay: 1.8s"><dt>profile</dt><dd>Apple M2 · 8 GiB</dd></div>
+            <div class="doctor-row" style="--delay: 2.05s"><dt>repository</dt><dd>JavaScript / TypeScript</dd></div>
+            <div class="doctor-row" style="--delay: 2.3s"><dt>policy</dt><dd>one heavy operation</dd></div>
+            <div class="doctor-row" style="--delay: 2.55s"><dt>watch</dt><dd>denied</dd></div>
+            <div class="doctor-row" style="--delay: 2.8s"><dt>cleanup</dt><dd>owned process group</dd></div>
+            <div class="doctor-row" style="--delay: 3.05s"><dt>ready</dt><dd>focused validation recommended</dd></div>
           </dl>
         </div>
         <div class="run-sequence" aria-label="Managed test execution sequence">
           <code class="sequence-command"><span class="prompt">$</span> <span class="bright typed-command run-typed">agent-lowmem run test</span></code>
           <ol class="sequence-steps">
-            <li class="sequence-step" style="--delay: 4.4s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
-            <li class="sequence-step" style="--delay: 4.75s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
-            <li class="sequence-step" style="--delay: 5.1s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
-            <li class="sequence-step" style="--delay: 5.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
-            <li class="sequence-step" style="--delay: 5.8s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
-            <li class="sequence-step" style="--delay: 6.15s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
-            <li class="sequence-step" style="--delay: 6.5s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
+            <li class="sequence-step" style="--delay: 5.1s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">inspect</code><span>package.json + lockfile</span></li>
+            <li class="sequence-step" style="--delay: 5.55s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">policy</code><span>test · one worker · no watch</span></li>
+            <li class="sequence-step" style="--delay: 6s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">lock</code><span>acquired</span></li>
+            <li class="sequence-step" style="--delay: 6.45s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">launch</code><span>pnpm test</span></li>
+            <li class="sequence-step" style="--delay: 6.9s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">supervise</code><span>timeout 15m · signals enabled</span></li>
+            <li class="sequence-step" style="--delay: 7.35s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">cleanup</code><span>process group released</span></li>
+            <li class="sequence-step" style="--delay: 7.8s"><span class="step-loader" aria-hidden="true"></span><code class="trace-key">result</code><span>completed</span></li>
           </ol>
         </div>
       </div>

@@ -12,8 +12,8 @@ fail() {
 grep -Eq '\.terminal-body[^\{]*\{[^}]*height:' "$FILE" || fail 'terminal body must have a stable height'
 [ "$(grep -Ec 'class="[^" ]*typed-command|class="[^" ]+ typed-command' "$FILE")" -eq 2 ] || fail 'both terminal commands must use the typing treatment'
 grep -Eq '@keyframes[[:space:]]+type-command' "$FILE" || fail 'missing finite command typing animation'
-grep -Eq '\.doctor-typed[^\{]*\{[^}]*steps\(19,[[:space:]]*end\)' "$FILE" || fail 'doctor command must type 19 characters'
-grep -Eq '\.run-typed[^\{]*\{[^}]*steps\(21,[[:space:]]*end\)' "$FILE" || fail 'managed command must type 21 characters'
+grep -Eq '\.doctor-typed[^\{]*\{[^}]*animation:[^;]*\.8s[[:space:]]+steps\(19,[[:space:]]*end\)' "$FILE" || fail 'doctor command must type 19 characters over .8 seconds'
+grep -Eq '\.run-typed[^\{]*\{[^}]*animation:[^;]*\.9s[[:space:]]+steps\(21,[[:space:]]*end\)' "$FILE" || fail 'managed command must type 21 characters over .9 seconds'
 
 if grep -Eq 'animation:[^;]*infinite' "$FILE"; then
   fail 'terminal animations must settle and never loop'
