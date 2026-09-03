@@ -16,5 +16,8 @@ fi
 
 printf '%s' "$HERO" | grep -Eq '<p class="lede">[^<]*<strong>Native Rust policy runner for macOS\.</strong></p>' || fail 'Rust positioning must close the lede in bold'
 grep -Eq 'h1[[:space:]]*\{[^}]*font:[^;]*clamp\(2\.35rem,[[:space:]]*6vw,[[:space:]]*3\.75rem\)[^;]*var\(--mono\)' "$FILE" || fail 'headline must use the restrained 60px mono scale'
+grep -Eq 'h1[[:space:]]*\{[^}]*font:[[:space:]]*500[[:space:]]' "$FILE" || fail 'headline must use the lighter 500 weight'
+grep -Eq '\.section-label[[:space:]]*\{[^}]*font-weight:[[:space:]]*500' "$FILE" || fail 'section label must use the lighter 500 weight'
+grep -Eq 'h2[[:space:]]*\{[^}]*font:[[:space:]]*500[[:space:]]' "$FILE" || fail 'section titles must use the lighter 500 weight'
 
 echo "hero contract passed"
