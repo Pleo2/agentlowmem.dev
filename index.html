@@ -23,6 +23,10 @@
       --muted: #aaa49a;
       --faint: #837d73;
       --line: #292622;
+      --window-border: #35322e;
+      --window-bar: #171613;
+      --window-highlight: rgba(255, 255, 255, .07);
+      --window-shadow: rgba(0, 0, 0, .32);
       --accent-solid: #7185ff;
       --gradient: linear-gradient(120deg, #c9b6ff 0%, #8b83ff 38%, #4f6cff 70%, #50d8ff 100%);
       --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -64,10 +68,16 @@
     .primary::before { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: var(--gradient); }
     .primary::after { content: " ↗"; margin-left: .35rem; color: var(--accent-solid); }
     .release { color: var(--faint); font: 400 .75rem/1.5 var(--mono); }
-    .terminal { max-width: 42.5rem; margin-top: clamp(4rem, 9vw, 6rem); border-block: 1px solid var(--line); background: var(--surface); }
-    .terminal-bar { display: flex; align-items: center; justify-content: space-between; min-height: 2.75rem; padding: 0 1rem; border-bottom: 1px solid var(--line); color: var(--faint); font: 400 .75rem/1 var(--mono); }
-    .lights { letter-spacing: .28em; color: var(--line); }
-    pre { margin: 0; padding: clamp(1.25rem, 4vw, 2rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
+    .terminal { max-width: 42.5rem; margin-top: clamp(4rem, 9vw, 6rem); overflow: hidden; border: 1px solid var(--window-border); border-radius: 1.125rem; background: var(--surface); box-shadow: 0 1.25rem 3rem var(--window-shadow), inset 0 1px var(--window-highlight); }
+    .terminal-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 3rem; padding: 0 1rem; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, var(--window-highlight), transparent), var(--window-bar); color: var(--faint); font: 500 .75rem/1 var(--mono); }
+    .window-controls { display: flex; align-items: center; gap: .5rem; }
+    .window-control { width: .72rem; height: .72rem; border: 1px solid rgba(0, 0, 0, .16); border-radius: 50%; }
+    .window-control.close { background: #ff5f57; }
+    .window-control.minimize { background: #febc2e; }
+    .window-control.zoom { background: #28c840; }
+    .window-title { grid-column: 2; color: var(--muted); letter-spacing: -.02em; }
+    .window-spacer { grid-column: 3; }
+    pre { margin: 0; padding: clamp(1.5rem, 5vw, 2.25rem); overflow-x: auto; color: var(--muted); font: 400 clamp(.75rem, 2vw, .84rem)/1.85 var(--mono); }
     .prompt, .ok { color: var(--accent-solid); }
     .bright { color: var(--text); }
     .terminal { animation: arrive .65s cubic-bezier(.2,.7,.2,1) both; }
@@ -106,6 +116,10 @@
         --muted: #5f5a52;
         --faint: #69635a;
         --line: #d5cfc5;
+        --window-border: #c9c3b8;
+        --window-bar: #e8e3da;
+        --window-highlight: rgba(255, 255, 255, .72);
+        --window-shadow: rgba(58, 48, 37, .15);
         --accent-solid: #4557c7;
         --gradient: linear-gradient(120deg, #7651b8 0%, #594ad0 38%, #3154c7 70%, #087b9d 100%);
         color-scheme: light;
@@ -147,7 +161,11 @@
     </section>
 
     <section class="terminal" aria-label="Agent Lowmem doctor example">
-      <div class="terminal-bar"><span class="lights" aria-hidden="true">● ● ●</span><span>agent-lowmem</span></div>
+      <div class="terminal-bar">
+        <span class="window-controls" aria-hidden="true"><span class="window-control close"></span><span class="window-control minimize"></span><span class="window-control zoom"></span></span>
+        <span class="window-title">agent-lowmem — doctor</span>
+        <span class="window-spacer" aria-hidden="true"></span>
+      </div>
       <pre><span class="prompt">$</span> <span class="bright">agent-lowmem doctor</span>
 
 host       macOS arm64
