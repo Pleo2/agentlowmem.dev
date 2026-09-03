@@ -72,7 +72,7 @@
     .status::before { content: ""; display: inline-block; width: .45rem; height: .45rem; margin-right: .45rem; border-radius: 50%; background: var(--gradient); }
     main { padding: clamp(4rem, 10vw, 7rem) 0 6rem; }
     .hero { max-width: 42.5rem; }
-    h1 { margin: 0; color: var(--text); font: 500 clamp(1.5rem, 4vw, 2rem)/1.25 var(--mono); letter-spacing: -.035em; }
+    h1 { margin: 0; color: var(--text); font: 500 clamp(.95rem, 2vw, 1.125rem)/1.4 var(--mono); letter-spacing: -.02em; }
     .lede { max-width: 39rem; margin: 1.25rem 0 0; font-size: clamp(.95rem, 2vw, 1.08rem); color: var(--muted); }
     .lede strong { color: var(--text); font-weight: 600; }
     .actions { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.15rem; }
@@ -244,8 +244,8 @@
   </header>
   <main class="shell">
     <section class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">Native policy runner for memory-constrained Macs.</h1>
-      <p class="lede">Agent Lowmem keeps agent-launched validation predictable on Apple Silicon—one managed heavy operation at a time. Written in Rust.</p>
+      <h1 id="hero-title">More agents. Less RAM.</h1>
+      <p class="lede"><strong>Native policy runner for memory-constrained Macs.</strong> Agent Lowmem keeps agent-launched validation predictable on Apple Silicon—one managed heavy operation at a time. Written in Rust.</p>
       <div class="actions">
         <a class="primary" href="https://github.com/Pleo2">Follow Pleo2 on GitHub</a>
         <span class="release">v0.1 · early development · macOS arm64</span>
@@ -304,7 +304,7 @@
     </section>
   </main>
   <footer class="shell">
-    <span>More agents. Less RAM.</span>
+    <span>Built for constrained machines.</span>
     <div class="footer-tools">
       <nav aria-label="Footer navigation"><a href="https://github.com/Pleo2/agentlowmem.dev">source</a></nav>
       <div class="theme-picker" role="radiogroup" aria-labelledby="theme-label">
